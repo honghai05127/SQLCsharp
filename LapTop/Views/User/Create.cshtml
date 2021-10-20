@@ -1,0 +1,22 @@
+﻿@model LapTop.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+
+    <form asp-action="Create" method="post">
+        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+        <label>Username</label>
+        <input asp-for="Tentaikhoan" /><br />
+       
+        <label>Password</label>
+        <input asp-for="Matkhau" /><br/>
+        <button class="btn btn-outline-success" type="submit">submit</button>
+    </form>
+
+   
+  <a asp-action="Index">Trở về trang chủ</a>
+            
