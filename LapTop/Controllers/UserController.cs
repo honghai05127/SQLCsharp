@@ -20,31 +20,13 @@ namespace LapTop.Controllers
             _configuration = config;
         }
 
-
+        
         // GET: UserController
         public ActionResult Index()
         {
-            string connStr = _configuration.GetConnectionString("DefaultConnection");
-            SqlConnection conn = new SqlConnection(connStr);
-            conn.Open();
+           
             List<User> list = new List<User>();
-            string query = "select * from _CODE_TAIKHOAN";
-            using (SqlCommand cmd = new SqlCommand(query, conn))
-            {
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        list.Add(new User()
-                        {
-                            Tentaikhoan = reader["TENDANGNHAP"].ToString(),
-                            Matkhau = reader["MATKHAU"].ToString()
-                        });
-
-                    }
-
-                }
-            }
+            list = GetUser();
             return View(list);
         }
 
@@ -86,8 +68,8 @@ namespace LapTop.Controllers
             }
             
         }
-        [NonAction]
-        public bool check_exists(string tentaikhoan)
+       
+        public List<User> GetUser()
         {
             string connStr = _configuration.GetConnectionString("DefaultConnection");
             SqlConnection conn = new SqlConnection(connStr);
@@ -110,12 +92,57 @@ namespace LapTop.Controllers
 
                 }
             }
+            return list;
+        }
+
+        [NonAction]
+        public bool check_exists(string tentaikhoan)
+        {
+            
+            List<User> list = new List<User>();
+            list = GetUser();
             foreach(User temp in list)
             {
                 if (temp.Tentaikhoan == tentaikhoan) return false;
             }
             return true;
-            }
+        }
 
+        // GET: UserController/Create
+        public ActionResult Delete(string tendangnhap)
+        {
+            //here, get the student from the database in the real application
+
+            //getting a student from collection for demo purpose
+            List<User> list = new List<User>();
+            list = GetUser();
+            var std = list.Where(ur => ur.Tentaikhoan == tendangnhap).FirstOrDefault();
+
+            return View(std);
+        }
+        [HttpPost]
+        public ActionResult Delete(User user)
+        {
+            
+            List<User> list = new List<User>();
+            list = GetUser();
+            
+            var userFind = list.Where(s => s.Tentaikhoan == user.Tentaikhoan).FirstOrDefault();
+            string connStr = _configuration.GetConnectionString("DefaultConnection");
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+            string query = "DELETE FROM [dbo].[_CODE_TAIKHOAN] WHERE Tendangnhap = @tendangnhap ";
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@tendangnhap", user.Tentaikhoan);
+            cmd.Parameters.AddWithValue("@matkhau", user.Matkhau);
+
+            cmd.ExecuteNonQuery();
+
+            conn.Close();
+            return RedirectToAction("Index");
+        }
+
+        
     }
+
 }

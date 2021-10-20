@@ -29,7 +29,7 @@
                     @Html.DisplayFor(modelItem => item.Matkhau)
                 </td>
                 <td>
-                    <button class="btn btn-danger">Xóa</button>
+                    @Html.ActionLink("Delete", "Delete", new { tendangnhap = item.Tentaikhoan })
                 </td>
             </tr>
         }

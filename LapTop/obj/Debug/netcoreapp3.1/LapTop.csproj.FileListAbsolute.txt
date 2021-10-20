@@ -114,5 +114,5 @@ D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\LapTop.dll
 D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\LapTop.pdb
 D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\LapTop.genruntimeconfig.cache
 D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\Razor\Views\User\Index.cshtml.g.cs
-D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\Razor\Views\User\AddOrEdit.cshtml.g.cs
 D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\Razor\Views\User\Create.cshtml.g.cs
+D:\Nam3\framework\test\LapTop\LapTop\obj\Debug\netcoreapp3.1\Razor\Views\User\Delete.cshtml.g.cs
